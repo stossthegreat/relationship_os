@@ -115,65 +115,66 @@ class _SparkTabState extends State<SparkTab>
     return Stack(
       alignment: Alignment.center,
       children: [
-        // Rotating glow ring
+        // Rotating glow ring with orbiting dots
         AnimatedBuilder(
           animation: _pulseController,
           builder: (context, child) {
             return Transform.rotate(
               angle: _pulseController.value * 2 * 3.14159,
-              child: SizedBox(
-                width: 240,
-                height: 240,
-                child: Stack(
-                  children: [
-                    // Top dot
-                    Positioned(
-                      top: 0,
-                      left: 112,
-                      child: Container(
-                        width: 16,
-                        height: 16,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColors.amber400,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.amber400.withOpacity(0.6),
-                              blurRadius: 12,
-                              spreadRadius: 3,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    // Bottom dot
-                    Positioned(
-                      bottom: 0,
-                      left: 112,
-                      child: Container(
-                        width: 16,
-                        height: 16,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColors.orange500,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.orange500.withOpacity(0.6),
-                              blurRadius: 12,
-                              spreadRadius: 3,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: child,
             );
           },
+          child: SizedBox(
+            width: 240,
+            height: 240,
+            child: Stack(
+              children: [
+                // Top dot
+                Positioned(
+                  top: 0,
+                  left: 112,
+                  child: Container(
+                    width: 16,
+                    height: 16,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.amber400,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.amber400.withOpacity(0.6),
+                          blurRadius: 12,
+                          spreadRadius: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Bottom dot
+                Positioned(
+                  bottom: 0,
+                  left: 112,
+                  child: Container(
+                    width: 16,
+                    height: 16,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.orange500,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.orange500.withOpacity(0.6),
+                          blurRadius: 12,
+                          spreadRadius: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
 
-        // Main circle with pulse
+        // Main circle with pulse wrapped in RepaintBoundary
         RepaintBoundary(
           child: AnimatedBuilder(
             animation: _pulseController,
@@ -184,93 +185,94 @@ class _SparkTabState extends State<SparkTab>
                 child: child,
               );
             },
-          child: Container(
-            width: 224,
-            height: 224,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.amber500.withOpacity(0.2),
-                  AppColors.orange500.withOpacity(0.2),
-                  AppColors.red500.withOpacity(0.1),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              border: Border.all(
-                color: AppColors.amber500.withOpacity(0.3),
-                width: 2,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.amber500.withOpacity(0.2),
-                  blurRadius: 30,
-                  spreadRadius: 10,
-                ),
-              ],
-            ),
             child: Container(
-              margin: const EdgeInsets.all(16),
+              width: 224,
+              height: 224,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: AppColors.sparkGradient,
+                  colors: [
+                    AppColors.amber500.withOpacity(0.2),
+                    AppColors.orange500.withOpacity(0.2),
+                    AppColors.red500.withOpacity(0.1),
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
+                border: Border.all(
+                  color: AppColors.amber500.withOpacity(0.3),
+                  width: 2,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.orange500.withOpacity(0.5),
+                    color: AppColors.amber500.withOpacity(0.2),
                     blurRadius: 30,
-                    spreadRadius: 5,
+                    spreadRadius: 10,
                   ),
                 ],
               ),
-              child: Stack(
-                children: [
-                  // Shine overlay
-                  Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.white.withOpacity(0.2),
-                          Colors.transparent,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+              child: Container(
+                margin: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: AppColors.sparkGradient,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.orange500.withOpacity(0.5),
+                      blurRadius: 30,
+                      spreadRadius: 5,
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    // Shine overlay
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.white.withOpacity(0.2),
+                            Colors.transparent,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
                       ),
                     ),
-                  ),
-                  // Score text
-                  Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '$sparkScore',
-                          style: const TextStyle(
-                            fontSize: 72,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.white,
-                            height: 1,
+                    // Score text
+                    Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '$sparkScore',
+                            style: const TextStyle(
+                              fontSize: 72,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
+                              height: 1,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'SPARK LEVEL',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.amber200,
-                            letterSpacing: 2,
+                          const SizedBox(height: 8),
+                          Text(
+                            'SPARK LEVEL',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.amber200,
+                              letterSpacing: 2,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
