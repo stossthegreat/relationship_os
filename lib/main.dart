@@ -7,8 +7,15 @@ import 'core/theme/theme_provider.dart';
 import 'features/onboarding/onboarding_page.dart';
 import 'features/home/main_navigation.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Add error handling for uncaught exceptions
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    debugPrint('Flutter Error: ${details.exception}');
+    debugPrint('Stack trace: ${details.stack}');
+  };
   
   runApp(
     const ProviderScope(
@@ -93,7 +100,11 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      // Enhanced error logging
+      debugPrint('Error checking onboarding status: $e');
+      debugPrint('Stack trace: $stackTrace');
+      
       // If there's an error, default to onboarding
       if (mounted) {
         Navigator.of(context).pushReplacement(

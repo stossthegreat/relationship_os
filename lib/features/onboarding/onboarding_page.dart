@@ -105,15 +105,25 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           ),
 
           // Content
-          PageView(
+          PageView.builder(
             controller: _pageController,
-            children: const [
-              _WelcomeScreen(),
-              _TrackSparkScreen(),
-              _PlayTogetherScreen(),
-              _GrowSmarterScreen(),
-              _ReadyScreen(),
-            ],
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              switch (index) {
+                case 0:
+                  return const _WelcomeScreen();
+                case 1:
+                  return const _TrackSparkScreen();
+                case 2:
+                  return const _PlayTogetherScreen();
+                case 3:
+                  return const _GrowSmarterScreen();
+                case 4:
+                  return const _ReadyScreen();
+                default:
+                  return const _WelcomeScreen();
+              }
+            },
           ),
 
           // Bottom controls

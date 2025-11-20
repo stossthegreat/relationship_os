@@ -1,4 +1,4 @@
-package com.example.relationship_os
+package app.relationshipos
 
 import io.flutter.embedding.android.FlutterActivity
 

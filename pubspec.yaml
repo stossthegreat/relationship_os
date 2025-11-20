@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,19 +36,19 @@ dependencies:
   cupertino_icons: ^1.0.8
   
   # State Management
-  flutter_riverpod: ^2.5.1
+  flutter_riverpod: ^2.4.0
   
   # Storage
-  shared_preferences: ^2.3.3
+  shared_preferences: ^2.2.0
   
   # Onboarding
-  smooth_page_indicator: ^1.2.0+3
+  smooth_page_indicator: ^1.1.0
   
   # Icons (using material icons as fallback since lucide_icons_flutter might not exist)
   # lucide_icons_flutter: ^1.0.0
   
   # Animations
-  flutter_animate: ^4.5.0
+  flutter_animate: ^4.2.0
   
   # Utilities
   intl: ^0.19.0

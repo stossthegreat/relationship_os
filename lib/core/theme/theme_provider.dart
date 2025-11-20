@@ -14,7 +14,10 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
       final prefs = await SharedPreferences.getInstance();
       final isDark = prefs.getBool(_themeKey) ?? true; // Default to dark
       state = isDark ? ThemeMode.dark : ThemeMode.light;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      // Enhanced error logging
+      debugPrint('Error loading theme: $e');
+      debugPrint('Stack trace: $stackTrace');
       // If loading fails, just stay with default dark mode
       state = ThemeMode.dark;
     }
@@ -26,7 +29,10 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
       final newMode = state == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
       await prefs.setBool(_themeKey, newMode == ThemeMode.dark);
       state = newMode;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      // Enhanced error logging
+      debugPrint('Error toggling theme: $e');
+      debugPrint('Stack trace: $stackTrace');
       // If toggle fails, just toggle in memory
       state = state == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
     }

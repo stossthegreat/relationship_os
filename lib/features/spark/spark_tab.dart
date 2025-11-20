@@ -103,7 +103,9 @@ class _SparkTabState extends State<SparkTab>
           const SizedBox(height: 48),
 
           // Tonight's Quest Card
-          _buildQuestCard(),
+          RepaintBoundary(
+            child: _buildQuestCard(),
+          ),
         ],
       ),
     );
@@ -172,15 +174,16 @@ class _SparkTabState extends State<SparkTab>
         ),
 
         // Main circle with pulse
-        AnimatedBuilder(
-          animation: _pulseController,
-          builder: (context, child) {
-            final scale = 1.0 + (_pulseController.value * 0.05);
-            return Transform.scale(
-              scale: scale,
-              child: child,
-            );
-          },
+        RepaintBoundary(
+          child: AnimatedBuilder(
+            animation: _pulseController,
+            builder: (context, child) {
+              final scale = 1.0 + (_pulseController.value * 0.05);
+              return Transform.scale(
+                scale: scale,
+                child: child,
+              );
+            },
           child: Container(
             width: 224,
             height: 224,
@@ -548,6 +551,7 @@ class _SparkTabState extends State<SparkTab>
               ),
             ],
           ),
+        ),
         ),
       ),
     );
