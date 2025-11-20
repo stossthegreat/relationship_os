@@ -41,9 +41,6 @@ dependencies:
   # Storage
   shared_preferences: ^2.3.3
   
-  # UI & Fonts
-  google_fonts: ^6.2.1
-  
   # Onboarding
   smooth_page_indicator: ^1.2.0+3
   

@@ -7,28 +7,9 @@ import 'core/theme/theme_provider.dart';
 import 'features/onboarding/onboarding_page.dart';
 import 'features/home/main_navigation.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Set up error handling
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.presentError(details);
-  };
-  
-  // Set system UI overlay style
-  try {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: Colors.black,
-        systemNavigationBarIconBrightness: Brightness.light,
-      ),
-    );
-  } catch (e) {
-    debugPrint('Error setting system UI: $e');
-  }
-
   runApp(
     const ProviderScope(
       child: RelationshipOSApp(),
@@ -41,7 +22,13 @@ class RelationshipOSApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeProvider);
+    // Use a default theme mode if provider fails
+    ThemeMode themeMode = ThemeMode.dark;
+    try {
+      themeMode = ref.watch(themeProvider);
+    } catch (e) {
+      debugPrint('Error loading theme: $e');
+    }
 
     return MaterialApp(
       title: 'RelationshipOS',
@@ -50,6 +37,29 @@ class RelationshipOSApp extends ConsumerWidget {
       darkTheme: AppTheme.darkTheme(),
       themeMode: themeMode,
       home: const SplashScreen(),
+      builder: (context, child) {
+        // Error boundary
+        ErrorWidget.builder = (FlutterErrorDetails details) {
+          return Scaffold(
+            backgroundColor: const Color(0xFF030712),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error, color: Colors.red, size: 48),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Error: ${details.exception}',
+                    style: const TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          );
+        };
+        return child ?? const SizedBox.shrink();
+      },
     );
   }
 }
