@@ -552,7 +552,6 @@ class _SparkTabState extends State<SparkTab>
             ],
           ),
         ),
-        ),
       ),
     );
   }
