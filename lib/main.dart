@@ -7,7 +7,7 @@ import 'core/theme/theme_provider.dart';
 import 'features/onboarding/onboarding_page.dart';
 import 'features/home/main_navigation.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Set up error handling
@@ -16,14 +16,18 @@ void main() {
   };
   
   // Set system UI overlay style
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.black,
-      systemNavigationBarIconBrightness: Brightness.light,
-    ),
-  );
+  try {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.black,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
+  } catch (e) {
+    debugPrint('Error setting system UI: $e');
+  }
 
   runApp(
     const ProviderScope(
