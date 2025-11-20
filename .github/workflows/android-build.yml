@@ -76,7 +76,7 @@ jobs:
       - name: 📊 Generate Build Summary
         if: always()
         run: |
-          echo "## 🎉 Relationship-OS APK Build Complete!" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎉 DrillOS APK Build Complete!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📱 Build Information" >> $GITHUB_STEP_SUMMARY
           echo "- **Build Type**: ${{ github.event.inputs.build_type || 'release' }}" >> $GITHUB_STEP_SUMMARY
