@@ -29,7 +29,7 @@ class _GradientButtonState extends State<GradientButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) {
+      onTap: () {
         setState(() => _isPressed = false);
         widget.onPressed();
       },
