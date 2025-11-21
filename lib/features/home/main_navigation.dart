@@ -80,7 +80,9 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
     _glowController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
-    )..repeat(reverse: true);
+      value: 0.5, // Static value, no animation
+    );
+    // DO NOT call repeat() - causes Android crash in release mode
     debugPrint('=== MAIN NAV: initState complete ===');
   }
 
