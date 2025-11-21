@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_provider.dart';
 import 'features/onboarding/onboarding_page.dart';
-import 'features/home/main_navigation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -88,15 +85,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkOnboardingStatus() async {
     try {
       await Future.delayed(const Duration(milliseconds: 500));
-      final prefs = await SharedPreferences.getInstance();
-      final hasCompletedOnboarding = prefs.getBool('onboarding_complete') ?? false;
 
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => hasCompletedOnboarding
-                ? const MainNavigation()
-                : const OnboardingPage(),
+            builder: (_) => const OnboardingPage(),
           ),
         );
       }

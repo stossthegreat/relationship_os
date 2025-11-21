@@ -54,14 +54,24 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
     ),
   ];
 
-  final List<Widget> _pages = const [
-    SparkTab(),
-    PlayTab(),
-    PatternsTab(),
-    FutureTab(),
-    MediatorTab(),
-    VaultTab(),
-  ];
+  Widget _getPage(int index) {
+    switch (index) {
+      case 0:
+        return const SparkTab();
+      case 1:
+        return const PlayTab();
+      case 2:
+        return const PatternsTab();
+      case 3:
+        return const FutureTab();
+      case 4:
+        return const MediatorTab();
+      case 5:
+        return const VaultTab();
+      default:
+        return const SparkTab();
+    }
+  }
 
   @override
   void initState() {
@@ -129,7 +139,7 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
           // Current page with settings button overlay
           Stack(
             children: [
-              _pages[_currentIndex],
+              _getPage(_currentIndex),
               
               // Settings button
               SafeArea(
