@@ -21,7 +21,8 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
   int _currentIndex = 0;
   late AnimationController _glowController;
 
-  final List<_TabConfig> _tabs = [
+  // MOVED INSIDE A GETTER - This was the problem!
+  List<_TabConfig> get _tabs => [
     _TabConfig(
       icon: Icons.bolt,
       label: 'Spark',
@@ -359,4 +360,3 @@ class _TabConfig {
     required this.gradient,
   });
 }
-
