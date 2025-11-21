@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_provider.dart';
-import 'features/onboarding/onboarding_page.dart';
+import 'features/home/main_navigation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,9 +87,10 @@ class _SplashScreenState extends State<SplashScreen> {
       await Future.delayed(const Duration(milliseconds: 500));
 
       if (mounted) {
+        // TEMPORARY: Skip onboarding/sign-in, go directly to main app
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => const OnboardingPage(),
+            builder: (_) => const MainNavigation(),
           ),
         );
       }
@@ -98,11 +99,11 @@ class _SplashScreenState extends State<SplashScreen> {
       debugPrint('Error checking onboarding status: $e');
       debugPrint('Stack trace: $stackTrace');
       
-      // If there's an error, default to onboarding
+      // If there's an error, go to main nav
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => const OnboardingPage(),
+            builder: (_) => const MainNavigation(),
           ),
         );
       }
