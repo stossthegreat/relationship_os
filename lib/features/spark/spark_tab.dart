@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/theme/app_colors.dart';
 import '../../shared/widgets/gradient_button.dart';
 
@@ -20,10 +18,12 @@ class _SparkTabState extends State<SparkTab>
   @override
   void initState() {
     super.initState();
+    debugPrint('=== SPARK TAB: initState start ===');
     _pulseController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
+    debugPrint('=== SPARK TAB: initState complete ===');
   }
 
   @override
@@ -34,6 +34,7 @@ class _SparkTabState extends State<SparkTab>
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('=== SPARK TAB: build start ===');
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 24),
       child: Column(
@@ -42,7 +43,7 @@ class _SparkTabState extends State<SparkTab>
           Stack(
             alignment: Alignment.center,
             children: [
-              // Background orb top
+              // Background orbs - simplified for performance
               Positioned(
                 top: -80,
                 left: -40,
@@ -53,19 +54,15 @@ class _SparkTabState extends State<SparkTab>
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
                       colors: [
-                        AppColors.amber500.withOpacity(0.1),
+                        AppColors.amber500.withOpacity(0.05),
                         AppColors.amber500.withOpacity(0.0),
                       ],
                     ),
                   ),
-                )
-                    .animate(onPlay: (controller) => controller.repeat())
-                    .fadeIn(duration: 2.seconds)
-                    .then()
-                    .fadeOut(duration: 2.seconds),
+                ),
               ),
 
-              // Background orb bottom
+              // Background orb bottom - simplified
               Positioned(
                 top: 200,
                 right: -80,
@@ -76,16 +73,12 @@ class _SparkTabState extends State<SparkTab>
                     shape: BoxShape.circle,
                     gradient: RadialGradient(
                       colors: [
-                        AppColors.orange500.withOpacity(0.1),
+                        AppColors.orange500.withOpacity(0.05),
                         AppColors.orange500.withOpacity(0.0),
                       ],
                     ),
                   ),
-                )
-                    .animate(onPlay: (controller) => controller.repeat())
-                    .fadeIn(duration: 2.seconds, delay: 1.seconds)
-                    .then()
-                    .fadeOut(duration: 2.seconds),
+                ),
               ),
 
               // Main score circle with animations
@@ -278,7 +271,7 @@ class _SparkTabState extends State<SparkTab>
           ),
         ),
 
-        // Floating spark icon
+        // Floating spark icon - simplified for performance
         Positioned(
           top: -10,
           right: -10,
@@ -298,9 +291,9 @@ class _SparkTabState extends State<SparkTab>
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.amber500.withOpacity(0.5),
-                  blurRadius: 20,
-                  spreadRadius: 5,
+                  color: AppColors.amber500.withOpacity(0.3),
+                  blurRadius: 15,
+                  spreadRadius: 2,
                 ),
               ],
             ),
@@ -310,11 +303,7 @@ class _SparkTabState extends State<SparkTab>
               size: 40,
             ),
           ),
-        )
-            .animate(onPlay: (controller) => controller.repeat())
-            .moveY(begin: 0, end: -8, duration: 1.seconds)
-            .then()
-            .moveY(begin: -8, end: 0, duration: 1.seconds),
+        ),
 
         // Streak badge
         Positioned(
@@ -396,11 +385,11 @@ class _SparkTabState extends State<SparkTab>
   }
 
   Widget _buildQuestCard() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(32),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-        child: Container(
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: Container(
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.05),
@@ -553,7 +542,6 @@ class _SparkTabState extends State<SparkTab>
               ),
             ],
           ),
-        ),
       ),
     );
   }

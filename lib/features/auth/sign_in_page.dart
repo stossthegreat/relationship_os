@@ -24,10 +24,23 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _signIn() {
-    // Bypass authentication for now
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const MainNavigation()),
-    );
+    debugPrint('=== SIGN IN: Button pressed ===');
+    try {
+      // Bypass authentication for now
+      debugPrint('=== SIGN IN: Starting navigation ===');
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (_) {
+            debugPrint('=== SIGN IN: Building MainNavigation ===');
+            return const MainNavigation();
+          },
+        ),
+      );
+      debugPrint('=== SIGN IN: Navigation completed ===');
+    } catch (e, stack) {
+      debugPrint('=== SIGN IN ERROR: $e ===');
+      debugPrint('Stack trace: $stack');
+    }
   }
 
   @override

@@ -66,10 +66,12 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
   @override
   void initState() {
     super.initState();
+    debugPrint('=== MAIN NAV: initState start ===');
     _glowController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
+    debugPrint('=== MAIN NAV: initState complete ===');
   }
 
   @override
@@ -86,6 +88,7 @@ class _MainNavigationState extends ConsumerState<MainNavigation>
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('=== MAIN NAV: build start, index=$_currentIndex ===');
     return Scaffold(
       body: Stack(
         children: [
