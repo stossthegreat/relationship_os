@@ -86,9 +86,9 @@ class _SparkTabState extends State<SparkTab>
               // Main score circle with animations
               Column(
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 60), // More space at top
                   _buildSparkScore(),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 60), // More space at bottom
                   _buildStatusText(),
                 ],
               ),
@@ -109,6 +109,7 @@ class _SparkTabState extends State<SparkTab>
   Widget _buildSparkScore() {
     return Stack(
       alignment: Alignment.center,
+      clipBehavior: Clip.none, // Allow overflow
       children: [
         // Rotating glow ring with orbiting dots
         AnimatedBuilder(

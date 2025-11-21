@@ -62,9 +62,9 @@ class PlayTab extends StatelessWidget {
 
               Column(
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40), // More space at top
                   _buildHeader(),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 60), // More space at bottom
                   _buildTitle(),
                 ],
               ),
@@ -116,6 +116,7 @@ class PlayTab extends StatelessWidget {
   Widget _buildHeader() {
     return Stack(
       alignment: Alignment.center,
+      clipBehavior: Clip.none, // Allow overflow
       children: [
         Container(
           width: 160,
